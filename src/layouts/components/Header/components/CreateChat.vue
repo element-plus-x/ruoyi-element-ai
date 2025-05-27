@@ -6,6 +6,8 @@ const sessionStore = useSessionStore();
 
 /* 创建会话 开始 */
 function handleCreatChat() {
+  if (!sessionStore.currentSession)
+    return;
   // 创建会话, 跳转到默认聊天
   sessionStore.createSessionBtn();
 }
@@ -14,7 +16,10 @@ function handleCreatChat() {
 
 <template>
   <div
-    class="create-chat-container flex-center flex-none p-6px pl-8px pr-8px c-#0057ff b-#0057ff b-rounded-12px border-1px hover:bg-#0057ff hover:c-#fff hover:b-#fff hover:cursor-pointer border-solid"
+    class="create-chat-container flex-center flex-none p-6px pl-8px pr-8px c-#0057ff b-#0057ff b-rounded-12px border-1px hover:bg-#0057ff hover:c-#fff hover:b-#fff hover:cursor-pointer border-solid select-none"
+    :class="{
+      'is-disabled': !sessionStore.currentSession,
+    }"
     @click="handleCreatChat"
   >
     <el-icon size="12" class="flex-center flex-none w-14px h-14px">
@@ -24,4 +29,18 @@ function handleCreatChat() {
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: transparent;
+    color: #0057ff;
+    border-color: #0057ff;
+    border-style: solid;
+    cursor: not-allowed;
+    transition: none;
+  }
+}
+</style>

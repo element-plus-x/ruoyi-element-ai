@@ -14,6 +14,8 @@ const userStore = useUserStore();
 const designStore = useDesignStore();
 const sessionStore = useSessionStore();
 
+const currentSession = computed(() => sessionStore.currentSession);
+
 onMounted(() => {
   // 全局设置侧边栏默认宽度 (这个是不变的，一开始就设置)
   document.documentElement.style.setProperty(`--sidebar-default-width`, `${SIDE_BAR_WIDTH}px`);
@@ -55,7 +57,7 @@ onKeyStroke(event => event.ctrlKey && event.key.toLowerCase() === 'k', handleCtr
             >
               <Collapse />
               <CreateChat />
-              <div class="w-0.5px h-30px bg-[rgba(217,217,217)]" />
+              <div v-if="currentSession" class="w-0.5px h-30px bg-[rgba(217,217,217)]" />
             </div>
 
             <!-- 中间 -->

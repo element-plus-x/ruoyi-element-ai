@@ -13,6 +13,7 @@ const senderValue = ref('');
 const isDeepThinking = computed(() => chatStore.isDeepThinking);
 
 async function handleSend() {
+  localStorage.setItem('chatContent', senderValue.value);
   await sessionStore.createSessionList({
     userId: userStore.userInfo?.userId as number,
     sessionContent: senderValue.value,

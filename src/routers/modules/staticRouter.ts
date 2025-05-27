@@ -14,6 +14,7 @@ export const layoutRouter: RouteRecordRaw[] = [
         component: () => import('@/pages/chat/index.vue'),
         meta: {
           title: '通用聊天页面',
+          isDefaultChat: true,
           icon: 'HomeFilled',
           isHide: '1',
           isKeepAlive: '0', // 是否缓存路由数据[0是，1否]
@@ -27,6 +28,7 @@ export const layoutRouter: RouteRecordRaw[] = [
         component: () => import('@/pages/chat/index.vue'),
         meta: {
           title: '带 ID 的聊天页面',
+          isDefaultChat: false,
         },
       },
     ],

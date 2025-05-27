@@ -18,7 +18,7 @@ const sessionStore = useSessionStore();
 const sessionId = computed(() => route.params?.id);
 const conversationsList = computed(() => sessionStore.sessionList);
 const loadMoreLoading = computed(() => sessionStore.isLoadingMore);
-const active = computed(() => sessionStore.currentSession?.id);
+const active = ref<string | undefined>();
 
 onMounted(async () => {
   // 获取会话列表
@@ -28,6 +28,7 @@ onMounted(async () => {
     const currentSessionRes = await get_session(`${sessionId.value}`);
     // 通过 ID 查询详情，设置当前会话 (因为有分页)
     sessionStore.setCurrentSession(currentSessionRes.data);
+    active.value = `${sessionId.value}`;
   }
 });
 
@@ -176,7 +177,8 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
               :items-style="{
                 marginLeft: '8px',
                 userSelect: 'none',
-                borderRadius: '16px',
+                borderRadius: '10px',
+                padding: '8px 12px',
               }"
               :items-active-style="{
                 backgroundColor: '#fff',
@@ -255,11 +257,13 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
         padding: 0 12px;
 
         .creat-chat-btn {
+          user-select: none;
           display: flex;
           align-items: center;
           padding: 8px 6px;
           margin-top: 16px;
           margin-bottom: 6px;
+          color: #0057ff;
           background-color: rgba(0, 87, 255, 0.06);
           border-radius: 12px;
           border: 1px solid rgba(0, 102, 255, 0.15);

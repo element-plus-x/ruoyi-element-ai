@@ -6,8 +6,10 @@ import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { login } from '@/api';
 import { useUserStore } from '@/stores';
+import { useSessionStore } from '@/stores/modules/session';
 
 const userStore = useUserStore();
+const sessionStore = useSessionStore();
 
 const formRef = ref<FormInstance>();
 
@@ -30,8 +32,10 @@ async function handleSubmit() {
     res.data.token && userStore.setToken(res.data.token);
     res.data.userInfo && userStore.setUserInfo(res.data.userInfo);
     ElMessage.success('登录成功');
-    router.replace('/');
     userStore.closeLoginDialog();
+    // 立刻获取回话列表
+    await sessionStore.requestSessionList(1, true);
+    router.replace('/');
   }
   catch (error) {
     console.error('请求错误:', error);

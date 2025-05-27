@@ -13,6 +13,9 @@ export const useChatStore = defineStore('chat', () => {
   };
 
   const requestChatList = async (sessionId: number) => {
+    // 如果没有 token 则不查询聊天记录
+    if (!userStore.token)
+      return;
     try {
       const res = await getChatList({
         sessionId,

@@ -26,7 +26,7 @@ export const useSessionStore = defineStore('session', () => {
   // 会话列表核心状态
   const sessionList = ref<ChatSessionVo[]>([]); // 会话数据列表
   const currentPage = ref(1); // 当前页码（从1开始）
-  const pageSize = ref(20); // 每页显示数量
+  const pageSize = ref(25); // 每页显示数量
   const hasMore = ref(true); // 是否还有更多数据
   const isLoading = ref(false); // 全局加载状态（初始加载/刷新）
   const isLoadingMore = ref(false); // 加载更多状态（区分初始加载）
@@ -45,6 +45,12 @@ export const useSessionStore = defineStore('session', () => {
 
   // 获取会话列表（核心分页方法）
   const requestSessionList = async (page: number = currentPage.value, force: boolean = false) => {
+    // 如果没有token就直接清空
+    if (!userStore.token) {
+      sessionList.value = [];
+      return;
+    }
+
     if (!force && ((page > 1 && !hasMore.value) || isLoading.value || isLoadingMore.value))
       return;
 
@@ -62,13 +68,11 @@ export const useSessionStore = defineStore('session', () => {
 
       const resArr = await get_session_list(params);
 
-      // 预处理会话分组
+      // 预处理会话分组 并添加前缀图标
       const res = processSessions(resArr.rows);
 
       const allSessions = new Map(sessionList.value.map(item => [item.id, item])); // 现有所有数据
-      res.forEach(item =>
-        allSessions.set(item.id, { ...item, prefixIcon: markRaw(ChatLineRound) }),
-      ); // 更新/添加数据
+      res.forEach(item => allSessions.set(item.id, { ...item })); // 更新/添加数据
 
       // 按服务端排序重建列表（假设分页数据是按时间倒序，第一页是最新，后续页依次递减）
       // 此处需根据接口返回的排序规则调整，假设每页数据是递增的（第一页最新，第二页次新，第三页 oldest）
@@ -104,6 +108,16 @@ export const useSessionStore = defineStore('session', () => {
 
   // 发送消息后创建新会话
   const createSessionList = async (data: Omit<CreateSessionDTO, 'id'>) => {
+    if (!userStore.token) {
+      router.replace({
+        name: 'chatWithId',
+        params: {
+          id: 'not_login',
+        },
+      });
+      return;
+    }
+
     try {
       const res = await create_session(data);
       // 创建会话后立刻查询列表会话
@@ -202,6 +216,7 @@ export const useSessionStore = defineStore('session', () => {
       return {
         ...session,
         group, // 新增分组键字段
+        prefixIcon: markRaw(ChatLineRound), // 图标为静态组件，使用 markRaw 标记为静态组件
       };
     });
   }
