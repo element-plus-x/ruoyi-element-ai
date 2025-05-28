@@ -19,3 +19,11 @@
     border-radius: 16px;
   }
 }
+
+// rounded-tooltip
+.rounded-tooltip {
+  border-radius: 10px !important;
+  display: flex;
+  align-items: center;
+  height: fit-content;
+}

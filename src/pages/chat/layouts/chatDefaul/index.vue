@@ -1,5 +1,6 @@
 <!-- 默认消息列表页 -->
 <script setup lang="ts">
+import ModelSelect from '@/components/ModelSelect/index.vue';
 import WelecomeText from '@/components/WelecomeText/index.vue';
 import { useUserStore } from '@/stores';
 import { useChatStore } from '@/stores/modules/chat';
@@ -45,6 +46,8 @@ function setIsDeepThinking() {
     >
       <template #prefix>
         <div class="flex-1 flex items-center gap-8px flex-none w-fit overflow-hidden">
+          <ModelSelect />
+
           <div
             class="flex items-center gap-4px px-12px py-8px rounded-15px cursor-pointer font-size-12px border-1px border-gray border-solid hover:bg-[rgba(0,0,0,.04)]"
           >
