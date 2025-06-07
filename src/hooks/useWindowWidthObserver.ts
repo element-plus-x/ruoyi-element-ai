@@ -4,11 +4,58 @@ import { COLLAPSE_THRESHOLD, SIDE_BAR_WIDTH } from '@/config/index';
 import { useDesignStore } from '@/stores';
 
 /**
- * 这里逻辑是研究豆包的折叠逻辑后，设计的折叠方法
- * 基于ResizeObserver的窗口宽度监听hooks（高性能实时监控）
+ * @description 这里逻辑是研究豆包的折叠逻辑后，设计的折叠方法
+ * @description 基于ResizeObserver的窗口宽度监听hooks（高性能实时监控）
  * @param threshold 宽度阈值（默认600px，支持响应式）
  * @param onChange 自定义回调（传入则覆盖默认逻辑，参数：当前视口宽度是否超过阈值）
- * @returns {object} 包含卸载监听的方法及当前状态
+ *
+ * @template  使用示例
+ * 1. 基础使用（保留默认折叠逻辑）
+ * ```vue
+ * <script setup lang="ts">
+ *  import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
+ *  // 使用默认阈值600px，自动修改全局折叠状态
+ *  useWindowWidthObserver();
+ * </script>
+ * ```
+ * 2. 自定义阈值（例如 768px）
+ * ```vue
+ * <script setup lang="ts">
+ *  import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
+ *  // 自定义阈值768px，仍使用默认折叠逻辑
+ *  useWindowWidthObserver(768);
+ * </script>
+ * ```
+ * 3. 自定义回调（覆盖默认逻辑）
+ * ```vue
+ * <script setup lang="ts">
+ *  import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
+ *  // 传入自定义回调，例如控制其他组件显隐
+ *  const { unmount, isAboveThreshold } = useWindowWidthObserver(992, (isAbove) => {
+ *    console.log(`当前窗口是否大于992px：${isAbove}`);
+ *    // 可在此处执行任意自定义逻辑（如修改其他状态、控制组件等）
+ *  });
+ * </script>
+ * ```
+ * 4. 响应式阈值（动态调整阈值）
+ * ```vue
+ * <script setup lang="ts">
+ *   import { ref } from 'vue';
+ *   import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
+ *  // 动态阈值（例如根据路由参数变化）
+ *  const dynamicThreshold = ref(600);
+ *
+ *   // 监听阈值变化，自动触发逻辑更新
+ *  useWindowWidthObserver(dynamicThreshold, (isAbove) => {
+ *     console.log(`当前阈值${dynamicThreshold.value}，是否超过：${isAbove}`);
+ *   });
+ *
+ *   // 模拟阈值变化（实际场景中可能由用户操作或路由变化触发）
+ *   setTimeout(() => {
+ *     dynamicThreshold.value = 768;
+ *   }, 3000);
+ * </script>
+ * ```
  */
 export function useWindowWidthObserver(
   threshold: MaybeRef<number> = COLLAPSE_THRESHOLD,
@@ -105,46 +152,3 @@ export function useWindowWidthObserver(
     isAboveThreshold, // 当前是否超过阈值（Ref）
   };
 }
-
-// 使用示例与特性说明
-// 1. 基础使用（保留默认折叠逻辑）
-// <script setup lang="ts">
-// import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
-// // 使用默认阈值600px，自动修改全局折叠状态
-// useWindowWidthObserver();
-// </script>
-
-// 2. 自定义阈值（例如 768px）
-// <script setup lang="ts">
-// import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
-// // 自定义阈值768px，仍使用默认折叠逻辑
-// useWindowWidthObserver(768);
-// </script>
-
-// 3. 自定义回调（覆盖默认逻辑）
-// <script setup lang="ts">
-// import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
-// // 传入自定义回调，例如控制其他组件显隐
-// const { unmount, isAboveThreshold } = useWindowWidthObserver(992, (isAbove) => {
-//   console.log(`当前窗口是否大于992px：${isAbove}`);
-//   // 可在此处执行任意自定义逻辑（如修改其他状态、控制组件等）
-// });
-// </script>
-
-// 4. 响应式阈值（动态调整阈值）
-// <script setup lang="ts">
-// import { ref } from 'vue';
-// import { useWindowWidthObserver } from '@/hooks/useWindowWidthObserver';
-// // 动态阈值（例如根据路由参数变化）
-// const dynamicThreshold = ref(600);
-
-// // 监听阈值变化，自动触发逻辑更新
-// useWindowWidthObserver(dynamicThreshold, (isAbove) => {
-//   console.log(`当前阈值${dynamicThreshold.value}，是否超过：${isAbove}`);
-// });
-
-// // 模拟阈值变化（实际场景中可能由用户操作或路由变化触发）
-// setTimeout(() => {
-//   dynamicThreshold.value = 768;
-// }, 3000);
-// </script>
