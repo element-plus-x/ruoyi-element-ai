@@ -77,6 +77,14 @@ pnpm lint:stylelint # 样式格式化
 pnpm cz            # 规范提交（自动执行lint）
 ```
 
+开发模式配置远程服务器地址
+
+根目录下新建 `.env.development.local` 文件
+
+```bahs
+VITE_API_URL = xxxxxxxxxxxxxxxxxxxxx
+```
+
 ## 🧸 即将推出 （含 ruoyi-ai 接口联调）
 - [x] 会话管理
 - [x] 发送消息
