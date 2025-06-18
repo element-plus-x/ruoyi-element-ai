@@ -77,12 +77,29 @@ pnpm lint:stylelint # 样式格式化
 pnpm cz            # 规范提交（自动执行lint）
 ```
 
-开发模式配置远程服务器地址
+开发模式配置远程服务器地址:
 
 根目录下新建 `.env.development.local` 文件
 
-```bahs
+```bash
 VITE_API_URL = xxxxxxxxxxxxxxxxxxxxx
+```
+
+## 🪼 项目发版
+
+项目使用 `release-it` 进行发版
+
+默认更新次版本号，如果想每次更新修订号，可执行 pnpm release patch
+
+```bash
+# 更新主版本号
+ pnpm release major
+
+ # 更新次版本号
+ pnpm release minor
+
+ # 更新修订号
+ pnpm release patch
 ```
 
 ## 🧸 即将推出 （含 ruoyi-ai 接口联调）
