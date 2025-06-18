@@ -13,6 +13,8 @@ export default defineConfig((cnf) => {
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
+        "~": path.resolve(__dirname, "./src/assets"),
+        "GCnps": path.resolve(__dirname, "./src/components"),
       },
     },
     css: {
