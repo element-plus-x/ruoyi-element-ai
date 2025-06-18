@@ -1,15 +1,15 @@
 .el-form{
   .el-form-item{
     &:nth-last-child(1){
-      margin-bottom: 0px;
+      margin-bottom: 0;
     }
   }
 }
 
 // el 弹框不知道为啥宽度会变大
 .el-popup-parent--hidden {
-  overflow: hidden;
   width: 100% !important;
+  overflow: hidden;
 }
 
 
@@ -22,29 +22,73 @@
 
 // rounded-tooltip 提示框样式
 .rounded-tooltip {
-  border-radius: 10px !important;
   display: flex;
   align-items: center;
   height: fit-content;
+  border-radius: 10px !important;
 }
-
 .rounded-tooltip-enter-from {
-  transform: scale(0.9); /* 进入前：缩小隐藏 */
   opacity: 0;
+  transform: scale(0.9); /* 进入前：缩小隐藏 */
 }
 .rounded-tooltip-enter-active,
 .rounded-tooltip-leave-active {
   transition: transform 0.3s, opacity 0.3s; /* 缓入动画 */
 }
 .rounded-tooltip-enter-to {
-  transform: scale(1); /* 进入后：正常大小 */
   opacity: 1;
+  transform: scale(1); /* 进入后：正常大小 */
 }
 .rounded-tooltip-leave-from {
-  transform: scale(1); /* 离开前：正常大小 */
   opacity: 1;
+  transform: scale(1); /* 离开前：正常大小 */
 }
 .rounded-tooltip-leave-to {
-  transform: scale(0.9); /* 离开后：缩小隐藏 */
   opacity: 0;
+  transform: scale(0.9); /* 离开后：缩小隐藏 */
 }
+
+/* S Dialog 样式行为 */
+.dialog-fade-enter-active .el-dialog {
+  animation: dialog-open 0.2s cubic-bezier(0.33, 0.89, 0.25, 1.02);
+}
+.dialog-fade-leave-active {
+  animation: fade-out 0.2s linear;
+}
+.dialog-fade-leave-active .el-dialog {
+  animation: dialog-close 0.2s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+
+@keyframes dialog-open {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dialog-close {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+}
+
+// 遮罩层动画
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* E Dialog 样式行为 */

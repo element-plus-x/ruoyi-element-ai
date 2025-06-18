@@ -113,8 +113,8 @@ function onAfterLeave() {
 /* 动画样式（仅作用于弹框） */
 .dialog-zoom-enter-active,
 .dialog-zoom-leave-active {
-  transition: all 0.3s ease-in-out;
   transform-origin: center;
+  transition: all 0.3s ease-in-out;
 }
 .dialog-zoom-enter-from,
 .dialog-zoom-leave-to {
@@ -141,8 +141,8 @@ function onAfterLeave() {
   overflow: hidden;
   user-select: none;
   background-color: rgb(0 0 0 / 50%);
-  backdrop-filter: blur(3px);
   opacity: 1;
+  backdrop-filter: blur(3px);
   transition: opacity 0.3s;
 }
 .mask[hidden] {
@@ -189,9 +189,9 @@ function onAfterLeave() {
   height: 40px;
   padding: 4px;
   background: var(--login-dialog-logo-background);
-  filter: drop-shadow(0 4px 4px rgb(0 0 0 / 10%));
   border-radius: 12px;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 8%);
+  filter: drop-shadow(0 4px 4px rgb(0 0 0 / 10%));
 }
 .left-section .logo-wrap .logo-text {
   font-size: 16px;
