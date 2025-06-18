@@ -37,6 +37,7 @@
     "@vueuse/integrations": "^13.3.0",
     "element-plus": "^2.9.11",
     "hook-fetch": "^1.1.3",
+    "moment": "^2.30.1",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.3.0",
