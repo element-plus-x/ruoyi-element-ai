@@ -329,12 +329,12 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
     0 10px 20px 0 rgb(0 0 0 / 10%),
     0 0 1px 0 rgb(0 0 0 / 15%);
   opacity: 0;
-  transition: opacity 0.3s ease 0.3s, transform 0.3s ease 0.3s;
 
   // 指定样式过渡
 
   // 向左偏移一个宽度
   transform: translateX(-100%);
+  transition: opacity 0.3s ease 0.3s, transform 0.3s ease 0.3s;
 
   /* 新增：未激活悬停时覆盖延迟 */
   &.no-delay {
@@ -358,10 +358,10 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
 
   // 直接在这里写悬停时的样式（与 aside-container-suspended 一致）
   opacity: 1;
-  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
 
   // 过渡动画沿用原有设置
   transform: translateX(15px);
+  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
 
   // 会话列表高度-悬停样式
   .conversations-wrap {
