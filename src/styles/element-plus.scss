@@ -47,3 +47,48 @@
   opacity: 0;
   transform: scale(0.9); /* 离开后：缩小隐藏 */
 }
+
+/* S Dialog 样式行为 */
+.dialog-fade-enter-active .el-dialog {
+  animation: dialog-open 0.2s cubic-bezier(0.33, 0.89, 0.25, 1.02);
+}
+.dialog-fade-leave-active {
+  animation: fade-out 0.2s linear;
+}
+.dialog-fade-leave-active .el-dialog {
+  animation: dialog-close 0.2s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+
+@keyframes dialog-open {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dialog-close {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+}
+
+// 遮罩层动画
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* E Dialog 样式行为 */
