@@ -13,7 +13,7 @@ interface BaseResponse {
 }
 
 export const request = hookFetch.create<BaseResponse, 'data' | 'rows'>({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_WEB_BASE_API,
   headers: {
     'Content-Type': 'application/json',
   },
