@@ -23,5 +23,17 @@ export default defineConfig((cnf) => {
         },
       },
     },
+    server: {
+      host: true,
+      proxy: {
+        // https://cn.vitejs.dev/config/#server-proxy
+        '/dev-api': {
+          target: env.VITE_API_URL,
+          changeOrigin: true,
+          ws: true,
+          rewrite: (path) => path.replace(/^\/dev-api/, '')
+        }
+      }
+    }
   };
 });
