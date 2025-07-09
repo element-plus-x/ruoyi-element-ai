@@ -1,5 +1,6 @@
 import type { ChatSessionVo, CreateSessionDTO, GetSessionListParams } from '@/api/session/types';
 import { ChatLineRound } from '@element-plus/icons-vue';
+import { dayjs } from 'element-plus';
 import { defineStore } from 'pinia';
 import { markRaw } from 'vue';
 import { useRouter } from 'vue-router';
@@ -194,7 +195,9 @@ export const useSessionStore = defineStore('session', () => {
     const currentDate = new Date();
 
     return sessions.map((session) => {
-      const createDate = new Date(session.createTime!);
+      const format = 'YYYY/M/D Ah:mm'; // A 表示 AM/PM，h 表示 12 小时制小时，m 表示分钟
+      const createDate = dayjs(session.createTime!, format).toDate();
+
       const diffDays = Math.floor(
         (currentDate.getTime() - createDate.getTime()) / (1000 * 60 * 60 * 24),
       );
