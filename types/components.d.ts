@@ -35,7 +35,7 @@ declare module 'vue' {
     VerificationCode: typeof import('./../src/components/LoginDialog/components/FormLogin/VerificationCode.vue')['default']
     WelecomeText: typeof import('./../src/components/WelecomeText/index.vue')['default']
   }
-  export interface GlobalDirectives {
+  export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }
