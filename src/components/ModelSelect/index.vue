@@ -114,6 +114,10 @@ function handleClick(item: GetSessionListVO) {
   border: 1px solid var(--el-color-primary, #409eff);
   border-radius: 10px;
 }
+.model-select-box-text {
+  overflow: hidden;
+  height: 12px;
+}
 .popover-content-box-item.is-select {
   font-weight: 700;
   color: var(--el-color-primary, #409eff);
