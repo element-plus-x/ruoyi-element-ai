@@ -11,7 +11,7 @@ onMounted(async () => {
   await modelStore.requestModelList();
   // 设置默认模型
   if (
-    modelStore.modelList?.length > 0
+    modelStore.modelList.length > 0
     && (!modelStore.currentModelInfo || !modelStore.currentModelInfo.modelName)
   ) {
     modelStore.setCurrentModelInfo(modelStore.modelList[0]);
@@ -113,6 +113,10 @@ function handleClick(item: GetSessionListVO) {
   background: var(--el-color-primary-light-9, rgb(235.9 245.3 255));
   border: 1px solid var(--el-color-primary, #409eff);
   border-radius: 10px;
+}
+.model-select-box-text {
+  overflow: hidden;
+  height: 12px;
 }
 .popover-content-box-item.is-select {
   font-weight: 700;
