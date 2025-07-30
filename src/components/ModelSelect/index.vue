@@ -11,7 +11,7 @@ onMounted(async () => {
   await modelStore.requestModelList();
   // 设置默认模型
   if (
-    modelStore.modelList.length > 0
+    modelStore.modelList?.length > 0
     && (!modelStore.currentModelInfo || !modelStore.currentModelInfo.modelName)
   ) {
     modelStore.setCurrentModelInfo(modelStore.modelList[0]);
