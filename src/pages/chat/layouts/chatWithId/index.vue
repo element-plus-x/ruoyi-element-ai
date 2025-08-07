@@ -1,4 +1,4 @@
-<!-- 每个回话对应的聊天内容 -->
+<!-- 每个会话对应的聊天内容 -->
 <script setup lang="ts">
 import type { AnyObject } from 'typescript-api-pro';
 import type { BubbleProps } from 'vue-element-plus-x/types/Bubble';
@@ -21,7 +21,7 @@ type MessageItem = BubbleProps & {
   role: 'ai' | 'user' | 'system';
   avatar: string;
   thinkingStatus?: ThinkingStatus;
-  thinlCollapse?: boolean;
+  thinkCollapse?: boolean;
   reasoning_content?: string;
 };
 
@@ -101,7 +101,7 @@ function handleDataChunk(chunk: AnyObject) {
       // 开始思考链状态
       bubbleItems.value[bubbleItems.value.length - 1].thinkingStatus = 'thinking';
       bubbleItems.value[bubbleItems.value.length - 1].loading = true;
-      bubbleItems.value[bubbleItems.value.length - 1].thinlCollapse = true;
+      bubbleItems.value[bubbleItems.value.length - 1].thinkCollapse = true;
       if (bubbleItems.value.length) {
         bubbleItems.value[bubbleItems.value.length - 1].reasoning_content += reasoningChunk;
       }
@@ -123,7 +123,7 @@ function handleDataChunk(chunk: AnyObject) {
         // 开始思考链状态
         bubbleItems.value[bubbleItems.value.length - 1].thinkingStatus = 'thinking';
         bubbleItems.value[bubbleItems.value.length - 1].loading = true;
-        bubbleItems.value[bubbleItems.value.length - 1].thinlCollapse = true;
+        bubbleItems.value[bubbleItems.value.length - 1].thinkCollapse = true;
         if (bubbleItems.value.length) {
           bubbleItems.value[bubbleItems.value.length - 1].reasoning_content += parsedChunk
             .replace('<think>', '')
@@ -214,7 +214,7 @@ function addMessage(message: string, isUser: boolean) {
     content: message || '',
     reasoning_content: '',
     thinkingStatus: 'start',
-    thinlCollapse: false,
+    thinkCollapse: false,
     noStyle: !isUser,
   };
   bubbleItems.value.push(obj);
@@ -252,7 +252,7 @@ watch(
       <BubbleList ref="bubbleListRef" :list="bubbleItems" max-height="calc(100vh - 240px)">
         <template #header="{ item }">
           <Thinking
-            v-if="item.reasoning_content" v-model="item.thinlCollapse" :content="item.reasoning_content"
+            v-if="item.reasoning_content" v-model="item.thinkCollapse" :content="item.reasoning_content"
             :status="item.thinkingStatus" class="thinking-chain-warp" @change="handleChange"
           />
         </template>
@@ -268,7 +268,7 @@ watch(
       </BubbleList>
 
       <Sender
-        ref="senderRef" v-model="inputValue" class="chat-defaul-sender" :auto-size="{
+        ref="senderRef" v-model="inputValue" class="chat-default-sender" :auto-size="{
           maxRows: 6,
           minRows: 2,
         }" variant="updown" clearable allow-speech :loading="isLoading" @submit="startSSE" @cancel="cancelSSE"
@@ -360,7 +360,7 @@ watch(
       padding: 8px 4px;
     }
   }
-  .chat-defaul-sender {
+  .chat-default-sender {
     width: 100%;
     margin-bottom: 22px;
   }
