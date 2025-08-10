@@ -14,8 +14,24 @@ const timeRanges: Array<[start: number, end: number, label: TimeGreeting]> = [
 ];
 
 /**
- * 获取当前时段问候语（Vue组合式函数）
- * @returns 响应式的时段问候语
+ * 获取当前时段的问候语（Vue 组合式函数）
+ *
+ * @description
+ * 根据当前小时自动判断并返回适合的问候语（如“早上好”、“下午好”等）。
+ * 通常用于首页、欢迎面板等人性化展示场景。
+ *
+ * @example 使用示例
+ * ```vue
+ * <script setup lang="ts">
+ *  import { useTimeGreeting } from '@/hooks/useTimeGreeting';
+ *
+ *  const timeGreeting = useTimeGreeting();
+ * </script>
+ *
+ * <template>
+ *   <div>{{ timeGreeting }}好，欢迎~</div>
+ * </template>
+ * ```
  */
 export function useTimeGreeting() {
   // 直接计算初始值（合并初始化逻辑）
@@ -25,12 +41,3 @@ export function useTimeGreeting() {
   // 使用ref保持响应式（即使不更新，组件仍可正确绑定）
   return ref<TimeGreeting>(greeting);
 }
-
-// 示例用法（在Vue组件中）
-// <script setup lang="ts">
-// import { useTimeGreeting } from '@/hooks/useTimeGreeting';
-// const timeGreeting = useTimeGreeting();
-// </script>
-// <template>
-//   <div>{{ timeGreeting }}好，欢迎~</div>
-// </template>

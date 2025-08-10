@@ -194,7 +194,12 @@ async function cancelSSE() {
   cancel();
   // 结束最后一条消息打字状态
   if (bubbleItems.value.length) {
-    bubbleItems.value[bubbleItems.value.length - 1].typing = false;
+    const upDataItem = bubbleItems.value[bubbleItems.value.length - 1];
+    upDataItem.typing = false;
+    upDataItem.loading = false;
+    upDataItem.content = upDataItem.content ? `${upDataItem.content}` : '已取消';
+    upDataItem.thinkingStatus = 'end';
+    upDataItem.thinlCollapse = false;
   }
 }
 
