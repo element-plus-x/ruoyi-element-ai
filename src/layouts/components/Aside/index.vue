@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import type { ConversationItem } from 'vue-element-plus-x/types/Conversations';
 import type { ChatSessionVo } from '@/api/session/types';
+import { Conversations } from 'vue-element-plus-x';
 import { useRoute, useRouter } from 'vue-router';
 import { get_session } from '@/api';
 import logo from '@/assets/images/logo.png';
@@ -194,7 +195,7 @@ function handleMenuCommand(command: string, item: ConversationItem<ChatSessionVo
               :items-hover-style="{
                 backgroundColor: 'rgba(0, 0, 0, 0.04)',
               }"
-              @menu-command="handleMenuCommand"
+              @on-menu-command="handleMenuCommand"
               @change="handleChange"
             />
           </div>

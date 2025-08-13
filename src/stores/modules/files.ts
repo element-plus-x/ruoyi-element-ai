@@ -3,10 +3,10 @@ import type { FilesCardProps } from 'vue-element-plus-x/types/FilesCard';
 import { defineStore } from 'pinia';
 
 export const useFilesStore = defineStore('files', () => {
-  const filesList = ref<FilesCardProps & { file: File }[]>([]);
+  const filesList = ref<FilesCardProps[]>([]);
 
   // 设置文件列表
-  const setFilesList = (list: FilesCardProps & { file: File }[]) => {
+  const setFilesList = (list: FilesCardProps[]) => {
     filesList.value = list;
   };
 

@@ -6,7 +6,7 @@ import type { BubbleListInstance } from 'vue-element-plus-x/types/BubbleList';
 import type { FilesCardProps } from 'vue-element-plus-x/types/FilesCard';
 import type { ThinkingStatus } from 'vue-element-plus-x/types/Thinking';
 import { useHookFetch } from 'hook-fetch/vue';
-import { Sender } from 'vue-element-plus-x';
+import { Attachments, BubbleList, Sender, Thinking, XMarkdown } from 'vue-element-plus-x';
 import { useRoute } from 'vue-router';
 import { send } from '@/api';
 import FilesSelect from '@/components/FilesSelect/index.vue';
@@ -259,7 +259,7 @@ watch(
 
         <template #content="{ item }">
           <!-- chat 内容走 markdown -->
-          <XMarkdown v-if="item.content && item.role === 'system'" :markdown="item.content" class="markdown-body" :themes="{ light: 'github-light', dark: 'github-dark' }" default-theme-mode="dark" />
+          <XMarkdown v-if="item.content && item.role === 'system'" :markdown="item.content" class="markdown-body" :themes="{ light: 'github-light', dark: 'github-dark' }" default-theme-mode="light" />
           <!-- user 内容 纯文本 -->
           <div v-if="item.content && item.role === 'user'" class="user-content">
             {{ item.content }}
