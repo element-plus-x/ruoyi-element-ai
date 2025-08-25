@@ -48,13 +48,13 @@ const { stream, loading: isLoading, cancel } = useHookFetch({
     console.warn('测试错误拦截', err);
   },
 });
-// 记录进入思考中
-let isThinking = false;
+// // 记录进入思考中
+// let isThinking = false;
 
 watch(
   () => route.params?.id,
   async (_id_) => {
-    if (_id_) {
+    if (_id_ && _id_ !== 'undefined') {
       if (_id_ !== 'not_login') {
         // 判断的当前会话id是否有聊天记录，有缓存则直接赋值展示
         if (chatStore.chatMap[`${_id_}`] && chatStore.chatMap[`${_id_}`].length) {
@@ -96,6 +96,8 @@ watch(
 // 封装数据处理逻辑
 function handleDataChunk(chunk: AnyObject) {
   try {
+    // 记录是否进入思考中
+    let isThinking = false;
     const reasoningChunk = chunk.choices?.[0].delta.reasoning_content;
     if (reasoningChunk) {
       // 开始思考链状态
@@ -117,7 +119,7 @@ function handleDataChunk(chunk: AnyObject) {
         isThinking = true;
       }
       if (thinkEnd) {
-        isThinking = false;
+        isThinking = true;
       }
       if (isThinking) {
         // 开始思考链状态
